@@ -1,35 +1,12 @@
-def drawBoard(col: int, fil: int, tabla):
-    from colorama import init, Fore, Back, Style
-    head = ''
-    final = ''
-    for x in range(col):
-        head = head + " " + str(x + 1)
-    for i in range(fil):
-        tablero = ''
-        for j in range(col):
-            tablero = tablero[0:len(tablero) - 1] + "|"
-            if tabla[i][j] == 0:
-                tablero += Fore.RED + "O"
-            elif tabla[i][j] == 1:
-                tablero += Fore.GREEN + "O"
-            else:
-                tablero += " "
-            tablero += Fore.WHITE + "|"
-        if i == 0:
-            print(head)
-        print(tablero)
-    for x in range(0, col):
-        final = final + "+-"
-    final = final + "+"
-    print(final)
 def main():
+    from drawBoard import drawBoard
     import random
     import re
     tamanoTablero = ""
     while True:
         tamanoTablero = input("Ingrese el tamaño de tablero: ").strip()
-        uno = re.compile("[5-9]{1}\*[5-9]{1}")
-        unno = re.compile("[5-9]{1}[x|X][5-9]{1}")
+        uno = re.compile("[5-9]{1}\*[6-9]{1}")
+        unno = re.compile("[5-9]{1}[x|X][6-9]{1}")
         dos = re.compile("10\*10")
         doss = re.compile("10{1}[x|X]10{1}")
         if uno.fullmatch(tamanoTablero):
@@ -64,28 +41,21 @@ def main():
     print(nombreJugador1)
     print(nombreJugador2)
     drawBoard(columnas, filas, tablero)
-    j = 5
+    j = 100
     #while True:
     while j > 0:
         colocar = (random.randint(1,columnas) - 1)
-        print("Columna", colocar + 1)
+        #print("Columna", colocar + 1)
         #jugador = random.randint(0,1)
         jugador = j % 2
-        print("Valor", jugador)
+        #print("Valor", jugador)
         i = len(tablero[colocar]) - 1
         while i > 0:
             if tablero[i][colocar] is None:
                 tablero[i][colocar] = jugador
                 break
             i -= 1
-
-        #i = len(tablero[colocar]) - 1
-        #for i in range(0, i):
-        #    if tablero[colocar][i] is None:
-        #        tablero[colocar][i] = jugador
-         #       break
         drawBoard(columnas, filas,tablero)
-        #break
         j -= 1
 main()
 def construye_tabla_formatos():
