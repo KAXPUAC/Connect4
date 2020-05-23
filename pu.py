@@ -86,11 +86,13 @@ def MachineVsMachine():
                 body.append(None)
             tablero.append(body)
 
+        print(tablero)
         drawBoard(columnas, filas, tablero)
         j = 5
     #while True:
         while j > 0:
             colocar = (random.randint(1,columnas) - 1)
+            colocar = 3
         #print("Columna", colocar + 1)
         #jugador = random.randint(0,1)
             jugador = j % 2
@@ -105,6 +107,23 @@ def MachineVsMachine():
             j -= 1
     else:
         print("ERROR: Ingrese numeros y el tablero puede tener medidas de 5X6 hasta 10X10")
+
+def player():
+    aux = 0
+    while True:
+        colocar = int(input("Ingrese columa: ")) - 1
+        jugador = aux % 2
+        i = len(tablero[colocar]) - 1
+        while i > 0:
+            if tablero[i][colocar] is None:
+                tablero[i][colocar] = jugador
+                break
+            i -= 1
+        drawBoard(columnas, filas, tablero)
+
+        aux += 1
+
+
 
 def main():
    # from drawBoard import drawBoard
