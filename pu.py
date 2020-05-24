@@ -8,12 +8,12 @@ def drawBoard(col: int, fil: int, tabla):
         tablero = ''
         for j in range(col):
             tablero = tablero[0:len(tablero) - 1] + "|"
-            if tabla[i][j] == 0:
+            if tabla[i][j] != 0 and tabla[i][j]!=1:
+                tablero += " "
+            elif tabla[i][j] == 0:
                 tablero += "X"
             elif tabla[i][j] == 1:
                 tablero += "O"
-            else:
-                tablero += " "
             tablero += "|"
         if i == 0:
             print(head)
@@ -50,110 +50,359 @@ def sizeTable(sizeT):
         else:
             return sizeT
 
+def Inst():
+    print('\n*------------------------------------*')
+    print('** INSTRUCCIONES DEL JUEGO CONNECT4 **')
+    print('*------------------------------------*\n')
+    print('El juego está formado por un tablero, y fichas de forma "O" y "X" .Es un juego para dos jugadores y cada jugador tiene asignado una ficha. El objetivo de ​Connect4​, como su nombre lo dice,consiste en conectar 4 fichas del mismo unir una línea, en cualquier dirección, horizontal, vertical, y diagonalmente (hacia ambos lados). El jugador que forme la fila de cuatro fichas primero ganará. Las reglas del juego no son muy complicadas:\n')
+    print('* El jugador que juega primero se escoge al azar siendo utilizando la ficha "O".')
+    print('* Cada jugador tira una sola ficha por turno.')
+    print('* El tablero se compone de columnas,no de filas. Eso quiere decir que las fichas solo pueden introducirse en la parte de arriba de una columna,y caer hasta llegar a la parte más baja o encima de otra ficha.')
+    print('* El juego se gana solo si uno de los jugadores logra forman una linea de cuatro fichas del mismo.')
+    print('* Si el tablero se llena de fichas y no hay ganador, el juego quedó empatado.\n')
+    print('--> SI NECESITA AYUDA COMO JUGAR INGRESE LA OPCION (5) HELP')
+    print('*------------------------------------*\n')
+
 def PlayerVsPlayer():
-    print('\n---------------------------')
-    print('** MODO PLAYER vs PLAYER **\n')
+    import random 
+    print('\n*-------------------------*')
+    print('** MODO PLAYER vs PLAYER **')
+    print('*-------------------------*\n')
+    print('Antes de empezar a jugar si tiene duda de las instrucciones del juego ingrese el  siguiente comando -i o -I y si necesita ayuda ingrese el siguiente comando -h o -H')
     player1 = input("Ingrese nombre para PLAYER 1: ")
+    while True:
+        if player1 == '-i' or player1 == '-I':  
+            Inst()
+            player1 = input("Ingrese nombre para PLAYER 1: ")
+        elif player1 == '-h' or player1 == '-H':
+            Help()
+            player1 = input("Ingrese nombre para PLAYER 1: ")
+        else:
+            break
     player2 = input("Ingrese nombre para PLAYER 2: ")
-    print(player1)
-    print(player2)
+    while True:    
+        if player2 == '-i' or player2 == '-I':  
+            Inst()
+            player2 = input("Ingrese nombre para PLAYER 2: ")
+        elif player2 == '-h' or player2 == '-H':
+            Help()
+            player2 = input("Ingrese nombre para PLAYER 2: ")
+        else:
+            break
+    sizeT = input('Ingrese el tamaño del tablero: ')
+    print()
+    while True:
+        if sizeT == '-i' or sizeT == '-I':  
+            Inst()
+            sizeT = input('Ingrese el tamaño del tablero: ')
+        elif sizeT == '-h' or sizeT == '-H':
+            Help()
+            sizeT = input('Ingrese el tamaño del tablero: ')
+        else:
+            break
+    sizeT = sizeTable(sizeT)
+    global columnas, filas, cont
+    columnas = int(sizeT[0])
+    filas = int(sizeT[1])
+    cont = 0
+    tablero = []
+    for x in range(0,filas):
+        body = []
+        for j in range(0, columnas):
+            body.append(None)
+            cont +=1
+        tablero.append(body)
+    drawBoard(columnas, filas, tablero)
+    ss=random.randint(0,1)
+    selec = ['O','X']
+    p1 = selec[ss]
+    if ss == 0:
+        p2 = selec[1]
+        inicia = player1
+        sigue = player2
+    else:
+        p2 = selec[0]
+        inicia = player2
+        sigue = player1 
+    print('Tiros faltantes:',cont)
+    print('PLAYER 1:',player1,'->',p1)
+    print('PLAYER 2:',player2,'->', p2) 
+    while cont !=0:
+        cont -= 1
+        jugador = cont % 2
+        if jugador == 0:
+            Str = input('Toca tirar a '+ sigue + ' escoger una columna: ')
+            while True:
+                if Str == '-i' or Str == '-I':
+                    Inst()
+                    Str = input('Toca tirar a '+ sigue + ' escoger una columna: ')
+                elif Str == '-h' or Str == '-H':
+                    Help()
+                    Str = input('Toca tirar a '+ sigue + ' escoger una columna: ')
+                else:    
+                    colocar = int(Str) - 1
+                    print()
+                    break
+        else:
+            Str = input('Toca tirar a '+ inicia + ' escoger una columna: ')
+            while True:
+                if Str == '-i' or Str == '-I':
+                    Inst()
+                    Str = input('Toca tirar a '+ inicia + ' escoger una columna: ')
+                elif Str == '-h' or Str == '-H':
+                    Help()
+                    Str = input('Toca tirar a '+ inicia + ' escoger una columna: ')
+                else:
+                    colocar = int(Str) - 1
+                    print()
+                    break
 
-def PlayerVsMachine():
-    print('\n-------------------------------')
-    print('**MODO MACHINE vs MACHINE**\n')
-    player = input('Ingrese nombre para PLAYER')
-    print(player)
-    machine = input('Ingrese nombre para MACHINE')
-    print(machine)
-
-def MachineVsMachine():
-    print('\n-------------------------------')
-    print('**MODO MACHINE vs MACHINE**\n')
-    print('MACHINE_1')
-    print('MACHINE_2')
-    #from drawBoard import drawBoard
-    import random
-    sizeT = input("Ingrese el tamaño de tablero: ")
-    if len(sizeT) > 0:
-        sizeT = sizeTable(sizeT)
-        global columnas, filas
-        columnas = int(sizeT[0])
-        filas = int(sizeT[1])
-        tablero = []
-        for x in range(0,filas):
-            body = []
-            for j in range(0, columnas):
-                body.append(None)
-            tablero.append(body)
-
-        print(tablero)
-        drawBoard(columnas, filas, tablero)
-        j = 5
-    #while True:
-        while j > 0:
-            colocar = (random.randint(1,columnas) - 1)
-            colocar = 3
-        #print("Columna", colocar + 1)
-        #jugador = random.randint(0,1)
-            jugador = j % 2
-        #print("Valor", jugador)
-            i = len(tablero[colocar]) - 1
-            while i > 0:
+        if colocar >= 0 and colocar < columnas :
+            i = filas - 1 
+            while i >= 0:
                 if tablero[i][colocar] is None:
                     tablero[i][colocar] = jugador
                     break
                 i -= 1
-            drawBoard(columnas, filas,tablero)
-            j -= 1
-    else:
-        print("ERROR: Ingrese numeros y el tablero puede tener medidas de 5X6 hasta 10X10")
+            if i != -1 :
+                drawBoard(columnas, filas, tablero)
+                print('Tiros faltantes:',cont)
+            else:
+                print('ERROR: Columna llena escoger otra...\n')
+                cont +=1
+        else:
+            print('ERROR: Verificar que el rango de columnas es de 1 a',columnas,'...\n')
+            cont +=1
 
-def player():
-    aux = 0
+def PlayerVsMachine():
+    import random 
+    print('\n*--------------------------*')
+    print('** MODO PLAYER vs MACHINE **')
+    print('*--------------------------*\n')
+    print('Antes de empezar a jugar si tiene duda de las instrucciones del juego ingrese el  siguiente comando -i o -I y si necesita ayuda ingrese el siguiente comando -h o -H')
+    player1 = input("Ingrese nombre para PLAYER: ")
     while True:
-        colocar = int(input("Ingrese columa: ")) - 1
-        jugador = aux % 2
-        i = len(tablero[colocar]) - 1
-        while i > 0:
-            if tablero[i][colocar] is None:
-                tablero[i][colocar] = jugador
-                break
-            i -= 1
-        drawBoard(columnas, filas, tablero)
+        if player1 == '-i' or player1 == '-I':  
+            Inst()
+            player1 = input("Ingrese nombre para PLAYER: ")
+        elif player1 == '-h' or player1 == '-H':
+            Help()
+            player1 = input("Ingrese nombre para PLAYER: ")
+        else:
+            break
+    player2 = 'MACHINE'
+    sizeT = input('Ingrese el tamaño del tablero: ')
+    print()
+    while True:
+        if sizeT == '-i' or sizeT == '-I':  
+            Inst()
+            sizeT = input('Ingrese el tamaño del tablero: ')
+        elif sizeT == '-h' or sizeT == '-H':
+            Help()
+            sizeT = input('Ingrese el tamaño del tablero: ')
+        else:
+            break
+    sizeT = sizeTable(sizeT)
+    global columnas, filas, cont
+    columnas = int(sizeT[0])
+    filas = int(sizeT[1])
+    cont = 0
+    tablero = []
+    for x in range(0,filas):
+        body = []
+        for j in range(0, columnas):
+            body.append(None)
+            cont +=1
+        tablero.append(body)
+    drawBoard(columnas, filas, tablero)
+    ss=random.randint(0,1)
+    selec = ['O','X']
+    p1 = selec[ss]
+    if ss == 0:
+        p2 = selec[1]
+        inicia = player1
+        sigue = player2
+    else:
+        p2 = selec[0]
+        inicia = player2
+        sigue = player1 
+    print('Tiros faltantes:',cont)
+    print('PLAYER:',player1,'->',p1)
+    print(player2,'->', p2) 
+    while cont !=0:
+        cont -= 1
+        jugador = cont % 2
+        if jugador == 0:
+            if sigue == 'MACHINE':
+                print('Toca tirar a MACHINE')
+                colocar = (random.randint(1,columnas) - 1)
+                print()
+            else:
+                Str = input('Toca tirar a '+ sigue + ' escoger una columna: ')
+                while True:
+                    if Str == '-i' or Str == '-I':
+                        Inst()
+                        Str = input('Toca tirar a '+ sigue + ' escoger una columna: ')
+                    elif Str == '-h' or Str == '-H':
+                        Help()
+                        Str = input('Toca tirar a '+ sigue + ' escoger una columna: ')
+                    else:
+                        break
+                colocar = int(Str) - 1
+                print()
+        else:
+            if inicia == 'MACHINE':
+                print('Toca tirar a MACHINE')
+                colocar = (random.randint(1,columnas) - 1)
+                print()
+            else:
+                Str = input('Toca tirar a '+ inicia + ' escoger una columna: ')
+                while True:
+                    if Str == '-i' or Str == '-I':
+                        Inst()
+                        Str = input('Toca tirar a '+ inicia + ' escoger una columna: ')
+                    elif Str == '-h' or Str == '-H':
+                        Help()
+                        Str = input('Toca tirar a '+ inicia + ' escoger una columna: ')
+                    else:
+                        break
+                colocar = int(Str) - 1
+                print()
+        if colocar >= 0 and colocar < columnas :
+            i = filas - 1 
+            while i >= 0:
+                if tablero[i][colocar] is None:
+                    tablero[i][colocar] = jugador
+                    break
+                i -= 1
+            if i != -1 :
+                drawBoard(columnas, filas, tablero)
+                print('Tiros faltantes:',cont)
+            else:
+                print('ERROR: Columna llena escoger otra...\n')
+                cont +=1
+        else:
+            print('ERROR: Verificar que el rango de columnas es de 1 a',columnas,'...\n')
+            cont +=1
 
-        aux += 1
+def MachineVsMachine():
+    import random 
+    print('\n*---------------------------*')
+    print('** MODO MACHINE vs MACHINE **')
+    print('*---------------------------*\n')
+    player1 = 'MACHINE 1'
+    player2 = 'MACHINE 2'
+    sizeT = input('Ingrese el tamaño del tablero: ')
+    print()
+    while True:
+        if sizeT == '-i' or sizeT == '-I':  
+            Inst()
+            sizeT = input('Ingrese el tamaño del tablero: ')
+        elif sizeT == '-h' or sizeT == '-H':
+            Help()
+            sizeT = input('Ingrese el tamaño del tablero: ')
+        else:
+            break
+    sizeT = sizeTable(sizeT)
+    global columnas, filas, cont
+    columnas = int(sizeT[0])
+    filas = int(sizeT[1])
+    cont = 0
+    tablero = []
+    for x in range(0,filas):
+        body = []
+        for j in range(0, columnas):
+            body.append(None)
+            cont +=1
+        tablero.append(body)
+    drawBoard(columnas, filas, tablero)
+    ss=random.randint(0,1)
+    selec = ['O','X']
+    p1 = selec[ss]
+    if ss == 0:
+        p2 = selec[1]
+        inicia = player1
+        sigue = player2
+    else:
+        p2 = selec[0]
+        inicia = player2
+        sigue = player1 
+    print('Tiros faltantes:',cont)
+    print(player1,'->',p1)
+    print(player2,'->', p2) 
+    while cont != 0:
+        cont -= 1
+        jugador = cont % 2
+        if jugador == 0:
+            colocar = (random.randint(1,columnas) - 1)
+            print('Toca tirar a ' + sigue + ' escoger una columna: ', (colocar + 1))
+            print()
+        else:
+            colocar = (random.randint(1,columnas) - 1)
+            print('Toca tirar a ' + inicia + ' escoger una columna: ', (colocar + 1))
+            print()
+        if colocar >= 0 and colocar < columnas :
+            i = filas - 1 
+            while i >= 0:
+                if tablero[i][colocar] is None:
+                    tablero[i][colocar] = jugador
+                    break
+                i -= 1
+            if i != -1 :
+                drawBoard(columnas, filas, tablero)
+                print('Tiros faltantes:',cont)
+            else:
+                print('ERROR: Columna llena escoger otra...\n')
+                cont += 1
+        else:
+            print('ERROR: Verificar que el rango de columnas es de 1 a',columnas,'...\n')
+            cont += 1
 
-
+def Help():
+    print('\n*---------------------------*')
+    print('** HELP DEL JUEGO CONNECT4 **')
+    print('*---------------------------*\n')
+    print('> Si su opcion es el MODO PLAYER vs PLAYER lo que tiene que hacer es ingresar los nombres de ambos jugadores (el juego se los va pedir uno por uno) luego tiene que ingresar el tamaño del tablero.')
+    print('> Si su opcion es el MODO PLAYER vs MACHINE lo que tiene que hacer es ingresar su nombre (cuando el juego se lo pida) luego tiene que ingresar el tamaño del tablero.')
+    print('> Si su opcion es el MODO MACHINE vs MACHINE lo unico que tiene que hacer es ingresar el tamaño del tablero.')
+    print('\nATENCION!!!')
+    print('-> El jugador que le toca la ficha "O" es el que inicia.')
+    print('-> El tamaño del tablero tiene una medida minima de 5X6 y maxima de 10X10 de lo contrario el juego le va dar ERROR.')
+    print('-> El juego le va indicar por su nombre a quien le toca ingresar una ficha.')
+    print('-> Procure que el numero de columna que ingrese, en su turno, este en el rango de columnas del tablero de lo contrario le va dar ERROR.')
+    print('-> Si una de las columnas esta llena, ingrese la ficha en otra columna de lo contrario le va dar ERROR.')
+    print('-> Si aun tiene dudas de como son las instrucciones del juego ingrese la opcion (1) INSTRUCCIONES .')
+    print('*---------------------------*\n')
 
 def main():
    # from drawBoard import drawBoard
     exit = True
     while exit:
-        print('\n*** Bienvenido al juego CONNECT4 ***')
+        print('\n====================================')
+        print('*** Bienvenido al juego CONNECT4 ***')
         print('====================================')
         opcion = 0
-        while(opcion != 5) :
-                print('\nModos de juego:')
-                print('(1) PLAYER vs PLAYER\n(2) PLAYER vs MACHINE\n(3) MACHINE vs MACHINE\n(4) HELP\n(5) EXIT')
+        while(opcion != 6) :
+                print('(1) INSTRUCCIONES\n(2) PLAYER vs PLAYER\n(3) PLAYER vs MACHINE\n(4) MACHINE vs MACHINE\n(5) HELP\n(6) EXIT')
                 try:
                     opcion = int(input("Ingrese una opcion: "))
                     if opcion == 1:
-                        print("opcion 1")
-                        PlayerVsPlayer()
+                        Inst()
                     elif opcion == 2:
-                        print("opcion 2")
-                        PlayerVsMachine()
+                        PlayerVsPlayer()
                     elif opcion == 3:
-                        print("opcion 3")
-                        MachineVsMachine()
+                        PlayerVsMachine()
                     elif opcion == 4:
-                        print("HELP")    
-                    elif opcion == 5:   
-                        print("\nSaliendo del juego ...")
+                        MachineVsMachine()
+                    elif opcion == 5:
+                        Help()    
+                    elif opcion == 6:   
+                        print('\nGracias por visitar Connect4 !!! ')
+                        print('Saliendo del juego ...')
                         exit = False
                     else:
-                        print("\nERROR: Opcion invalida! Solo hay opciones 1, 2, 3, 4, y 5\n")
+                        print('\nERROR: Opcion invalida! Solo hay opciones 1, 2, 3, 4, 5 y 6\n')
                 except ValueError:
-                    print("\nERROR: Opcion invalida! No ingreso un numero entero\n")
+                    print('\nERROR: Opcion invalida! No ingreso un numero entero\n')
                     opcion = 0
 main()
