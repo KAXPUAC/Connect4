@@ -48,7 +48,8 @@ def sizeTable(sizeT):
                 sizeT = sizeT[0].split("X")
             return sizeT
         else:
-            return sizeT
+            print("Tamaño de tablero no válido")
+            sizeT = input('Ingrese el tamaño del tablero: ')
 
 def Inst():
     print('\n*------------------------------------*')
