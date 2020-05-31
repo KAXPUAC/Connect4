@@ -1,3 +1,4 @@
+#Funcion que devuelve si gano el jugador
 def searchWinner(board, symbol: int):
     winner = False
     columns = len(board[0])

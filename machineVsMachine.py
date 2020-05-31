@@ -9,6 +9,7 @@ from player import Player
 from help import Help
 
 import random
+#Procedimiento de Maquina versus Maquina
 def MachineVsMachine():
     print('\n*--------------------------*')
     print('** MODO PLAYER vs MACHINE **')

@@ -1,3 +1,4 @@
+#Class de Colores, para poder imprimar de colores las fichas
 class Colors:
     CEND = '\33[0m'
     CBOLD = '\33[1m'

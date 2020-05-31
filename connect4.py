@@ -1,8 +1,10 @@
+#Archivo Principal
 from help import Help
 from instructions import Inst
 from playerVsPlayer import PlayerVsPlayer
 from playerVsMachine import PlayerVsMachine
 from machineVsMachine import MachineVsMachine
+#menu de el juego
 def menu():
     while True:
         print('\n====================================')

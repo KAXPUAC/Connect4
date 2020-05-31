@@ -1,3 +1,4 @@
+#Procedimiento que imprime la ayuda de el juego
 def Help():
     print('\n*---------------------------*')
     print('** HELP DEL JUEGO CONNECT4 **')

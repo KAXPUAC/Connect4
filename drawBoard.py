@@ -1,3 +1,4 @@
+#Procedimiento que dibuja el tablero en consola
 from colors import Colors
 def drawBoard(board):
     head = ''

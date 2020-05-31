@@ -1,3 +1,4 @@
+#Veifica y devuelve el tamaño de el tablero
 import re
 def sizeBoar(sizeT):
     size = [5,6]

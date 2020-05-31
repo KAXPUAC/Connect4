@@ -1,4 +1,7 @@
 import random
+#Funcion que devuelve una columna en donce se colocara la ficha
+#ya sea para bloquear la jugada de el oponente
+#o para colocar la ficha para ganar el juego
 def moveMachine(board, symbol: int):
     columns = len(board[0])
     # Verificar Filas

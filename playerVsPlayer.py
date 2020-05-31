@@ -7,6 +7,7 @@ from setMove import setMove
 from player import Player
 from help import Help
 import random
+#Modo de Juego Humano versus Humano
 def PlayerVsPlayer():
     print('\n*-------------------------*')
     print('** MODO PLAYER vs PLAYER **')

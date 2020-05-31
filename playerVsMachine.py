@@ -9,6 +9,7 @@ from player import Player
 from help import Help
 
 import random
+#Mo de juego Humano versus Maquina
 def PlayerVsMachine():
     print('\n*--------------------------*')
     print('** MODO PLAYER vs MACHINE **')

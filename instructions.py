@@ -1,3 +1,4 @@
+#Procedimiento que imprime las instrucciones de el juego
 def Inst():
     print('\n*------------------------------------*')
     print('** INSTRUCCIONES DEL JUEGO CONNECT4 **')
