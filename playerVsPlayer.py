@@ -56,7 +56,14 @@ def PlayerVsPlayer():
         while True:
             player = player1 if (aux % 2 == 0) else player2
             try:
-                move = int(input("Turno de -> " + player.getName()+ " elija una columna: "))
+                move = input("Turno de -> " + player.getName() + " elija una columna: ")
+                if move == '-i' or move == '-I':
+                    Inst()
+                    continue
+                elif move == '-h' or move == '-H':
+                    Help()
+                    continue
+                move = int(move)
                 if 0 < move <= len(board[0]):
                     move -= 1
                     if setMove(board, move, player.getSymbol()):
