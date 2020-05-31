@@ -1,4 +1,6 @@
 #Veifica y devuelve el tamaño de el tablero
+from instructions import Inst
+from help import Help
 import re
 def sizeBoar(sizeT):
     size = [5,6]
@@ -12,7 +14,13 @@ def sizeBoar(sizeT):
         dieezreverse = re.compile("10{1}\*[6-9]{1}")
         dos = re.compile("10\*10")
         doss = re.compile("10{1}[x|X]10{1}")
-        if uno.fullmatch(sizeT):
+        if sizeT == '-i' or sizeT == '-I':
+            Inst()
+            sizeT = input('Ingrese el tamaño del tablero: ')
+        elif sizeT == '-h' or sizeT == '-H':
+            Help()
+            sizeT = input('Ingrese el tamaño del tablero: ')
+        elif uno.fullmatch(sizeT):
             sizeT = sizeT.split("*")
             size[0] = int(sizeT[0])
             size[1] = int(sizeT[1])
