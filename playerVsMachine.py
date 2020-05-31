@@ -50,10 +50,8 @@ def PlayerVsMachine():
             try:
                 if player.getTurn() == 1:
                     move = moveMachine(board, player.getSymbol())
-                    print(move)
                     if move is None:
                         move = moveMachine(board, player1.getSymbol())
-                    print(move)
                     print("Turno de -> " + player.getName() + " elija una columna: " + str(move))
                 else:
                     move = int(input("Turno de -> " + player.getName()+ " elija una columna: "))
@@ -67,7 +65,6 @@ def PlayerVsMachine():
                                 player1.setWon(player1.getWon() + 1)
                             else:
                                 player2.setWon(player2.getWon() + 1)
-                            #player.setWon(player.getWon() + 1)
                             break
                         drawBoard(board)
                         aux += 1
