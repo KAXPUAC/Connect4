@@ -39,12 +39,14 @@ def MachineVsMachine():
                     move = moveMachine(board, player.getSymbol())
                     if move is None:
                         move = moveMachine(board, player1.getSymbol())
+                    print()
                     print("Turno de -> " + player.getName() + " elija una columna: " + str(move))
                 else:
                     #move = int(input("Turno de -> " + player.getName()+ " elija una columna: "))
                     move = moveMachine(board, player2.getSymbol())
                     if move is None:
                         move = moveMachine(board, player.getSymbol())
+                    print()
                     print("Turno de -> " + player.getName() + " elija una columna: " + str(move))
                 if 0 < move <= len(board[0]):
                     move -= 1
