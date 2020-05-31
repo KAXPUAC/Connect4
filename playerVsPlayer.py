@@ -60,8 +60,8 @@ def PlayerVsPlayer():
                     move -= 1
                     if setMove(board, move, player.getSymbol()):
                         if searchWinner(board, player.getSymbol()):
-                            print("JUEGO TERMINADO", player.getName(), "GANÓ")
                             drawBoard(board)
+                            print("JUEGO TERMINADO", player.getName(), "GANÓ")
                             if player.getTurn() == 0:
                                 player1.setWon(player1.getWon() + 1)
                             else:
