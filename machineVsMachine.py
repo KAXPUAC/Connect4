@@ -7,7 +7,7 @@ from instructions import Inst
 from setMove import setMove
 from player import Player
 from help import Help
-
+from colors import Colors
 import random
 #Procedimiento de Maquina versus Maquina
 def MachineVsMachine():
