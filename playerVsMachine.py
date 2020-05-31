@@ -53,8 +53,10 @@ def PlayerVsMachine():
                     move = moveMachine(board, player.getSymbol())
                     if move is None:
                         move = moveMachine(board, player1.getSymbol())
+                    print()
                     print("Turno de -> " + player.getName() + " elija una columna: " + str(move))
                 else:
+                    print()
                     move = input("Turno de -> " + player.getName()+ " elija una columna: ")
                     if move == '-i' or move == '-I':
                         Inst()
