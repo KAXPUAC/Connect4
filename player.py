@@ -1,11 +1,13 @@
 #Clase Player
+from colors import Colors
 class Player:
     #Constructor de la clase
-    def __init__(self, name, symbol = 0, turn = 0, won = 0):
+    def __init__(self, name, symbol = 0, turn = 0, won = 0, color = Colors.CWHITE):
         self.name = name
         self.symbol = symbol
         self.turn = turn
         self.won = won
+        self.color = color
     #metodo para setear el nombre
     def setName(self, name):
         self.name = name
@@ -15,9 +17,12 @@ class Player:
     #metodo para setear el turno
     def setTurn(self, turn):
         self.turn = turn
-    #metdo para setear el numero de veces que gano el juego
+    #metodo para setear el numero de veces que gano el juego
     def setWon(self, won):
         self.won = won
+    #metodo para seteear el color
+    def setColor(self, color):
+        self.color = color
     #metodo para obtener el nombre
     def getName(self):
         return self.name
@@ -30,6 +35,9 @@ class Player:
     #metodo para obtener las veces qque gano el juego
     def getWon(self):
         return self.won
+    #metodo para devolver el color
+    def getColor(self):
+        return self.color
     #Procedimiento que imprime el nombre anteponiendo Ganador
     def win(self):
         print("Ganador", self.name)
