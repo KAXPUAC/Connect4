@@ -47,7 +47,6 @@ def PlayerVsPlayer():
             break
     sizeT = sizeBoar(sizeT)
     player = player1 if (random.randint(0,100) % 2 == 0) else player2
-    #player.getPlayer()
     aux = player.getTurn()
     stop = (sizeT[0] * sizeT[1]) + player.getTurn()
     while True:
@@ -55,17 +54,16 @@ def PlayerVsPlayer():
         drawBoard(board)
         while True:
             player = player1 if (aux % 2 == 0) else player2
-            #player.getPlayer()
             try:
                 move = int(input("Turno de -> " + player.getName()+ " elija una columna: "))
                 if 0 < move <= len(board[0]):
                     move -= 1
                     if setMove(board, move, player.getSymbol()):
-                        if searchWinner(board, move, player.getSymbol()):
-                            print("JUEGO TERMINADO", player.getName(), "GANO")
+                        if searchWinner(board, player.getSymbol()):
+                            print("JUEGO TERMINADO", player.getName(), "GANÓ")
                             drawBoard(board)
                             if player.getTurn() == 0:
-                                player1.setWont(player1.getWon() + 1)
+                                player1.setWon(player1.getWon() + 1)
                             else:
                                 player2.setWon(player2.getWon() + 1)
                             #player.setWon(player.getWon() + 1)
@@ -86,4 +84,6 @@ def PlayerVsPlayer():
             aux = player.getTurn()
             stop = (sizeT[0] * sizeT[1]) + player.getTurn()
         else:
+            print(player1.getName(), player1.getWon(), player2.getName(), player2.getWon())
+            print()
             break
