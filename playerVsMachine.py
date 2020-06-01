@@ -1,3 +1,4 @@
+# coding=utf-8
 from searchWinner import searchWinner
 from moveMachine import moveMachine
 from buildBoard import buildBoard
@@ -7,14 +8,17 @@ from instructions import Inst
 from setMove import setMove
 from player import Player
 from help import Help
-
+from colors import Colors
 import random
-#Mo de juego Humano versus Maquina
+
+
+# Mo de juego Humano versus Maquina
 def PlayerVsMachine():
     print('\n*--------------------------*')
     print('** MODO PLAYER vs MACHINE **')
     print('*--------------------------*\n')
-    print('Antes de empezar a jugar si tiene duda de las instrucciones del juego ingrese el  siguiente comando -i o -I y si necesita ayuda ingrese el siguiente comando -h o -H')
+    print('Antes de empezar a jugar si tiene duda de las instrucciones del juego ingrese el  siguiente comando -i o -I '
+          'y si necesita ayuda ingrese el siguiente comando -h o -H')
     player1 = input("Ingrese nombre para PLAYER 1: ")
     while True:
         if player1 == '-i' or player1 == '-I':
@@ -25,9 +29,9 @@ def PlayerVsMachine():
             player1 = input("Ingrese nombre para PLAYER 1: ")
         else:
             break
-    player1 = Player(player1)
+    player1 = Player(player1, 0, 0, 0, Colors.CRED)
     print("Ingrese nombre para PLAYER 2: MACHINE")
-    player2 = Player("MACHINE", 1, 1)
+    player2 = Player("MACHINE", 1, 1, 0, Colors.CGREEN)
     sizeT = input('Ingrese el tamaño del tablero: ')
     print()
     while True:
@@ -40,11 +44,11 @@ def PlayerVsMachine():
         else:
             break
     sizeT = sizeBoar(sizeT)
-    player = player1 if (random.randint(0,100) % 2 == 0) else player2
+    player = player1 if (random.randint(0, 100) % 2 == 0) else player2
     aux = player.getTurn()
     stop = (sizeT[0] * sizeT[1]) + player.getTurn()
     while True:
-        board = buildBoard(sizeT[0],sizeT[1])
+        board = buildBoard(sizeT[0], sizeT[1])
         drawBoard(board)
         while True:
             player = player1 if (aux % 2 == 0) else player2
@@ -54,10 +58,10 @@ def PlayerVsMachine():
                     if move is None:
                         move = moveMachine(board, player1.getSymbol())
                     print()
-                    print("Turno de -> " + player.getName() + " elija una columna: " + str(move))
+                    print("Turno de -> " + player.getNameColor() + " elija una columna: " + str(move))
                 else:
                     print()
-                    move = input("Turno de -> " + player.getName()+ " elija una columna: ")
+                    move = input("Turno de -> " + player.getNameColor() + " elija una columna: ")
                     if move == '-i' or move == '-I':
                         Inst()
                         continue
@@ -70,7 +74,7 @@ def PlayerVsMachine():
                     if setMove(board, move, player.getSymbol()):
                         if searchWinner(board, player.getSymbol()):
                             drawBoard(board)
-                            print("JUEGO TERMINADO", player.getName(), "GANÓ")
+                            print("JUEGO TERMINADO", player.getNameColor(), "GANÓ")
                             if player.getTurn() == 0:
                                 player1.setWon(player1.getWon() + 1)
                             else:
@@ -92,6 +96,6 @@ def PlayerVsMachine():
             aux = player.getTurn()
             stop = (sizeT[0] * sizeT[1]) + player.getTurn()
         else:
-            print(player1.getName(), player1.getWon(), player2.getName(), player2.getWon())
+            print(player1.getNameColor(), player1.getWon(), player2.getNameColor(), player2.getWon())
             print()
             break
