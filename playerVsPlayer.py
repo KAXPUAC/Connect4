@@ -1,18 +1,23 @@
+# coding=utf-8
 from searchWinner import searchWinner
 from buildBoard import buildBoard
 from drawBoard import drawBoard
 from sizeBoard import sizeBoar
 from instructions import Inst
 from setMove import setMove
+from colors import Colors
 from player import Player
 from help import Help
 import random
-#Modo de Juego Humano versus Humano
+
+
+# Modo de Juego Humano versus Humano
 def PlayerVsPlayer():
     print('\n*-------------------------*')
     print('** MODO PLAYER vs PLAYER **')
     print('*-------------------------*\n')
-    print('Antes de empezar a jugar si tiene duda de las instrucciones del juego ingrese el  siguiente comando -i o -I y si necesita ayuda ingrese el siguiente comando -h o -H')
+    print(
+        'Antes de empezar a jugar si tiene duda de las instrucciones del juego ingrese el  siguiente comando -i o -I y si necesita ayuda ingrese el siguiente comando -h o -H')
     player1 = input("Ingrese nombre para PLAYER 1: ")
     while True:
         if player1 == '-i' or player1 == '-I':
@@ -23,7 +28,7 @@ def PlayerVsPlayer():
             player1 = input("Ingrese nombre para PLAYER 1: ")
         else:
             break
-    player1 = Player(player1)
+    player1 = Player(player1, 0, 0, 0, Colors.CRED)
     player2 = input("Ingrese nombre para PLAYER 2: ")
     while True:
         if player2 == '-i' or player2 == '-I':
@@ -34,7 +39,7 @@ def PlayerVsPlayer():
             player2 = input("Ingrese nombre para PLAYER 2: ")
         else:
             break
-    player2 = Player(player2, 1, 1)
+    player2 = Player(player2, 1, 1, 0, Colors.CGREEN)
     sizeT = input('Ingrese el tamaño del tablero: ')
     print()
     while True:
@@ -47,17 +52,17 @@ def PlayerVsPlayer():
         else:
             break
     sizeT = sizeBoar(sizeT)
-    player = player1 if (random.randint(0,100) % 2 == 0) else player2
+    player = player1 if (random.randint(0, 100) % 2 == 0) else player2
     aux = player.getTurn()
     stop = (sizeT[0] * sizeT[1]) + player.getTurn()
     while True:
-        board = buildBoard(sizeT[0],sizeT[1])
+        board = buildBoard(sizeT[0], sizeT[1])
         drawBoard(board)
         while True:
             player = player1 if (aux % 2 == 0) else player2
             try:
                 print()
-                move = input("Turno de -> " + player.getName() + " elija una columna: ")
+                move = input("Turno de -> " + player.getNameColor() + " elija una columna: ")
                 if move == '-i' or move == '-I':
                     Inst()
                     continue
@@ -70,12 +75,12 @@ def PlayerVsPlayer():
                     if setMove(board, move, player.getSymbol()):
                         if searchWinner(board, player.getSymbol()):
                             drawBoard(board)
-                            print("JUEGO TERMINADO", player.getName(), "GANÓ")
+                            print("JUEGO TERMINADO", player.getNameColor(), "GANÓ")
                             if player.getTurn() == 0:
                                 player1.setWon(player1.getWon() + 1)
                             else:
                                 player2.setWon(player2.getWon() + 1)
-                            #player.setWon(player.getWon() + 1)
+                            # player.setWon(player.getWon() + 1)
                             break
                         drawBoard(board)
                         aux += 1
@@ -93,6 +98,6 @@ def PlayerVsPlayer():
             aux = player.getTurn()
             stop = (sizeT[0] * sizeT[1]) + player.getTurn()
         else:
-            print(player1.getName(), player1.getWon(), player2.getName(), player2.getWon())
+            print(player1.getNameColor(), player1.getWon(), player2.getNameColor(), player2.getWon())
             print()
             break
