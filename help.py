@@ -1,3 +1,4 @@
+# coding=utf-8
 #Procedimiento que imprime la ayuda de el juego
 def Help():
     print('\n*---------------------------*')
@@ -13,4 +14,8 @@ def Help():
     print('-> Procure que el numero de columna que ingrese, en su turno, este en el rango de columnas del tablero de lo contrario le va dar ERROR.')
     print('-> Si una de las columnas esta llena, ingrese la ficha en otra columna de lo contrario le va dar ERROR.')
     print('-> Si aun tiene dudas de como son las instrucciones del juego ingrese la opcion (1) INSTRUCCIONES .')
-    print('*---------------------------*\n')
+    print("***********************************************************************************************************")
+    print("             Kevin Manfredy Axpuac Juárez, 15006597 , IME")
+    print("             Miguel Angel Lemus Moráles, 14003328 , ITR")
+    print("             Ciencias de la Computación I, Universidad Galileo, 2020")
+    print('*--------------------------------------------------------------------------------------------------------*\n')
